@@ -2,7 +2,7 @@
 
 ### Required
 
-Node, npm, yarn
+Node, npm
 
 ### How to run
 
@@ -10,13 +10,9 @@ Node, npm, yarn
 
 `npm install`
 
-`yarn dev` ...
+`npm run dev` ...
 
 ...and on the second terminal... 
 
-...`yarn start`
-
-### Building for Production
-
-`yarn build`
+...`npm start`
  
