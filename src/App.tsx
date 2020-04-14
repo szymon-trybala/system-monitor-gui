@@ -3,7 +3,9 @@ import { Component } from "react";
 import { push as Menu } from "react-burger-menu";
 import { NavLink, Route, Switch } from "react-router-dom";
 import { Home } from "./components/Home";
+import InformationSystem from "./components/InformationSystem";
 import "./styles/burger-menu.css";
+
 
 export default class App extends Component {
   public render() {
@@ -21,7 +23,7 @@ export default class App extends Component {
         <div id="page-wrap">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/system" exact render={() => <p>Nie masz systemu biedaku</p>} />
+            <Route path="/system" exact render={() => <InformationSystem></InformationSystem>} />
           </Switch>
         </div>
       </>
