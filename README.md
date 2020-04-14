@@ -2,7 +2,7 @@
 
 ### Required
 
-Node, npm
+Node, npm, yarn
 
 ### How to run
 
@@ -10,9 +10,17 @@ Node, npm
 
 `npm install`
 
-`npm run dev` ...
+`yarn dev` ...
 
 ...and on the second terminal... 
 
-...`npm start`
+...`yarn start`
+
+### Building for Production
+
+`yarn build`
  
+
+ ### Disabling/enabling dev tools
+
+Comment or uncomment `mainWindow.webContents.openDevTools()` line in `main.js`

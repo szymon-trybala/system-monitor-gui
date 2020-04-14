@@ -1,53 +1,42 @@
 import * as React from 'react';
-import { Component } from 'react';
 import "../styles/information-system.css";
-//InformationSystem
 
-export interface InformationSystemProps {
+const SystemInformation = () => {
+    const [systemVersion, setSystemVersion] = React.useState(":(((");
+    const [hostName, setHostName] = React.useState(":)))");
 
-}
-
-export interface InformationSystemState {
-
-}
-
-class InformationSystem extends React.Component<InformationSystemProps, InformationSystemState> {
-
-    state = {
-        systemVersion: String,
-        hostName: String
-    }
-
-
-    componentWillMount() {
-
-        this.setState({
-            hostName: "NutkaDanutak",
-            systemVersion: "Ubunt"
+    React.useEffect(() => {
+        const {exec} = require('child_process');
+        exec('system_monitor_cli.exe --disk-type', (error: any, stdout: any, stderr: any) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            setHostName(stdout);
         })
-    }
+        exec('system_monitor_cli.exe --name', (error: any, stdout: any, stderr: any) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            setSystemVersion(stdout);
+        })
+    }, [hostName, systemVersion])
 
+    return (
+        <div className="rowinformation">
+        <div >
 
+            <h3>Nazwa hosta:</h3>
+            <p>{hostName}</p>
+        </div>
 
-    render() {
-
-
-
-        return (
-            <div className="rowinformation">
-                <div >
-
-                    <h3>Nazwa hosta:</h3>
-                    <p>{this.state.hostName}</p>
-                </div>
-
-                <div >
-                    <h3>Wersja systemu:</h3>
-                    <p>{this.state.systemVersion}</p>
-                </div>
-            </div>
-        );
-    }
+        <div >
+            <h3>Wersja systemu:</h3>
+            <p>{systemVersion}</p>
+        </div>
+    </div>
+    )
 }
 
-export default InformationSystem;
+export default SystemInformation;

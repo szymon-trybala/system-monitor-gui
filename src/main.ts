@@ -3,6 +3,7 @@
  */
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import { exec } from 'child_process';
 import * as url from 'url';
 
 let mainWindow: Electron.BrowserWindow | null;
@@ -14,10 +15,11 @@ function createWindow(): void {
         width: 1280,
         webPreferences: {
             webSecurity: false,
-            devTools: process.env.NODE_ENV === 'production' ? false : true
+            devTools: process.env.NODE_ENV === 'production' ? false : true,
+            nodeIntegration: true
         }
     });
-
+    mainWindow.webContents.openDevTools();
     // and load the index.html of the app.
     mainWindow.loadURL(
         url.format({
@@ -35,6 +37,7 @@ function createWindow(): void {
         mainWindow = null;
     });
 }
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
