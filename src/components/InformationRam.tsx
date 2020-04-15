@@ -12,6 +12,11 @@ const InformationRam = () => {
     const [memoryOfUse, setMemoryOfUse] = React.useState("");
 
     React.useEffect(() => {
+
+        setInterval(func, 1000);
+    },[])
+
+    const func = () => {
         const { exec } = require('child_process');
         exec('system_monitor_cli.exe --ram', (error: any, stdout: string, stderr: any) => {
             if (error) {
@@ -23,11 +28,8 @@ const InformationRam = () => {
             setAllMemory(value[1]);
             setFreeMemory(value[2]);
             setMemoryOfUse(value[3]);
-
-
-        })
-    }, [percentageOfUse, allMemory, freeMemory, memoryOfUse])
-
+        });
+    };
 
     return (
 
