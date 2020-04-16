@@ -86,6 +86,10 @@ const InformationCpu = () => {
                         backgroundColor: 'none',
                         legendTextStyle: { color: 'grey' },
                         titleTextStyle: { color: 'grey' },
+                        slices: {
+                            1: { offset: 0.2 }
+                  
+                    },
                     }}
                     rootProps={{ 'data-testid': '2' }}
                 />

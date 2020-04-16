@@ -7,6 +7,7 @@ import InformationSystem from "./components/InformationSystem";
 import NetworkAdapter from "./components/NetworkAdapter";
 import InforamtionCpu from "./components/InformationCpu";
 import InformationRam from "./components/InformationRam"
+import InformationDisc from "./components/InformationDisc"
 import "./styles/burger-menu.css";
 
 
@@ -30,7 +31,9 @@ export default class App extends Component {
           <NavLink to="/cpu" className="menu-item">
             Informacje o CPU
           </NavLink>
-
+          <NavLink to="/disc" className="menu-item">
+            Informacje o dysku
+          </NavLink>
 
         </Menu>
 
@@ -41,7 +44,8 @@ export default class App extends Component {
             <Route path="/network/adapter" render={() => <NetworkAdapter></NetworkAdapter>} />
             <Route path="/ram" render={() => <InformationRam></InformationRam>} />
             <Route path="/cpu" render={() => <InforamtionCpu></InforamtionCpu>} />
-            
+            <Route path="/disc" render={() => <InformationDisc></InformationDisc>} />
+
           </Switch>
         </div>
       </>

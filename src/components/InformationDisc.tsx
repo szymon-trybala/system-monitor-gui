@@ -4,31 +4,36 @@ import { Chart } from "react-google-charts";
 import { Redirect } from 'react-router';
 import "../styles/chart.css"
 
-const InformationRam = () => {
+const InformationDisc = () => {
 
-    const [percentageOfUse, setPercentageOfUse] = React.useState("");
-    const [allMemory, setAllMemory] = React.useState("");
-    const [freeMemory, setFreeMemory] = React.useState("");
-    const [memoryOfUse, setMemoryOfUse] = React.useState("");
+    const [freeSpace, setFreeSpace] = React.useState("");
+    const [usedSpace, setUsedSpace] = React.useState("");
+    const [typeOfDisk, setTypeOfDisk] = React.useState("");
 
     React.useEffect(() => {
 
         setInterval(func, 1000);
-    },[])
+    }, [])
 
     const func = () => {
         const { exec } = require('child_process');
-        exec('system_monitor_cli.exe --ram', (error: any, stdout: string, stderr: any) => {
+        exec('system_monitor_cli.exe -d', (error: any, stdout: string, stderr: any) => {
             if (error) {
                 console.log(error);
                 return;
             }
             var value = stdout.toString().split("\n");
-            setPercentageOfUse(value[0]);
-            setAllMemory(value[1]);
-            setFreeMemory(value[2]);
-            setMemoryOfUse(value[3]);
+            setFreeSpace(value[0]);
+            setUsedSpace(value[1]);
         });
+        exec('system_monitor_cli.exe --disk-type', (error: any, stdout: string, stderr: any) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            setTypeOfDisk(stdout);
+        });
+
     };
 
     return (
@@ -36,20 +41,16 @@ const InformationRam = () => {
         <>
             <div className="rowinformation">
                 <div >
-                    <h3>Wykorzystania pamięci RAM:</h3>
-                    <p>{percentageOfUse} %</p>
+                    <h3>Wolna pamieć:</h3>
+                    <p>{freeSpace} MB</p>
                 </div>
                 <div >
-                    <h3>Całkowita ilość pamięci RAM:</h3>
-                    <p>{allMemory} MB</p>
+                    <h3>Użyat:</h3>
+                    <p>{usedSpace} MB</p>
                 </div>
                 <div >
-                    <h3>Ilość wolnej pamięci:</h3>
-                    <p>{freeMemory} MB</p>
-                </div>
-                <div >
-                    <h3>Ilość używanej pamięci:</h3>
-                    <p>{memoryOfUse} MB</p>
+                    <h3>Typ dysku:</h3>
+                    <p>{typeOfDisk} MB</p>
                 </div>
             </div>
             <div className="chart-position">
@@ -61,11 +62,11 @@ const InformationRam = () => {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Task', 'Hours per Day'],
-                        ['Wolna pamięć', 100 - parseInt(percentageOfUse)],
-                        ['Używana pamięć', parseInt(percentageOfUse)],
+                        ['Wolna pamięć', parseInt(freeSpace)],
+                        ['Używana pamięć', parseInt(usedSpace)],
                     ]}
                     options={{
-                        title: 'Zużycie pamięci RAM',
+                        title: 'Twardy dysk',
                         is3D: true,
                         backgroundColor: 'none',
                         legendTextStyle: { color: 'grey' },
@@ -74,8 +75,7 @@ const InformationRam = () => {
                             1: { offset: 0.2 }
                   
                     },
-                   
-                    }}
+                }}
 
                     rootProps={{ 'data-testid': '2' }}
                 />
@@ -84,4 +84,4 @@ const InformationRam = () => {
     )
 }
 
-export default InformationRam;
+export default InformationDisc;
