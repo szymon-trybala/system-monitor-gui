@@ -50,7 +50,7 @@ const InformationMonitor = () => {
                     <p>{amountOfMonitors}</p>
                 </div>
                 <div >
-                    <h3>Nazwa głownego monitoru:</h3>
+                    <h3>Nazwa głównego monitora:</h3>
                     <p>{nameOfMainMonitor}</p>
                 </div>
                 <div >

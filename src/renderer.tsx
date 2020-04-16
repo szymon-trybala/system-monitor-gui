@@ -11,7 +11,7 @@ import { HashRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <div className='app'>
-   <Router><App /></Router> 
+   <Router><App /></Router>
   </div>,
   document.getElementById('app')
 );

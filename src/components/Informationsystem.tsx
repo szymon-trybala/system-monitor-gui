@@ -7,14 +7,14 @@ const SystemInformation = () => {
 
     React.useEffect(() => {
         const {exec} = require('child_process');
-        exec('system_monitor_cli.exe --disk-type', (error: any, stdout: any, stderr: any) => {
+        exec('system_monitor_cli.exe --name', (error: any, stdout: any, stderr: any) => {
             if (error) {
                 console.log(error);
                 return;
             }
             setHostName(stdout);
         })
-        exec('system_monitor_cli.exe --name', (error: any, stdout: any, stderr: any) => {
+        exec('system_monitor_cli.exe --win', (error: any, stdout: any, stderr: any) => {
             if (error) {
                 console.log(error);
                 return;
