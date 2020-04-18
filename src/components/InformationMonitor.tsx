@@ -59,7 +59,7 @@ const InformationMonitor = () => {
             </div>
             <div className="rowinformation_div">
                 <h3 className="rowinformation_title">Częstotliwość odświeżania:</h3>
-                <div className="rowinformation_title">{refreshRate === "" ? <LoadingIcon /> : refreshRate}</div>
+                <div className="rowinformation_title">{refreshRate === "" ? <LoadingIcon /> : refreshRate + "Hz"}</div>
 
             </div>
             <div className="rowinformation_div">
