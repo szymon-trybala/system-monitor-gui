@@ -1,6 +1,6 @@
 .chart-position {
-    position: relative;
-    top: 110px;
-   
+    position: absolute;
+    top: 40px;
+    right: 80px;
 
 }
