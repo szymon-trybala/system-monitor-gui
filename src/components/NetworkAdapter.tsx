@@ -36,7 +36,7 @@ const NetworkAdapter = () => {
             <div className="rowinformation">
                 <div className="rowinformation_div">
                     <h3 className="rowinformation_title">Maksymalna prędkość:</h3>
-                    <div className="rowinformation_title">{maxSpeed === "" ? <LoadingIcon /> : maxSpeed + 'KB/s'}</div>
+                    <div className="rowinformation_title">{maxSpeed === "" ? <LoadingIcon /> : maxSpeed + 'Mb/s'}</div>
 
                 </div>
                 <div className="rowinformation_div">

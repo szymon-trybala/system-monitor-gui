@@ -47,7 +47,7 @@ const InformationDisc = () => {
 
                 </div>
                 <div className="rowinformation_div">
-                    <h3 className="rowinformation_title">Użyat:</h3>
+                    <h3 className="rowinformation_title">Użycie:</h3>
                     <div className="rowinformation_title">{usedSpace === "" ? <LoadingIcon /> : usedSpace + 'MB'}</div>
 
                 </div>
