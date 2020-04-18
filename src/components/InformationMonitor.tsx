@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Chart } from "react-google-charts";
 import { Redirect } from 'react-router';
+import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
 const InformationMonitor = () => {
@@ -44,25 +45,31 @@ const InformationMonitor = () => {
 
     return (
         <>
-            <div className="rowinformation">
-                <div >
-                    <h3>Liczba monitorów:</h3>
-                    <p>{amountOfMonitors}</p>
-                </div>
-                <div >
-                    <h3>Nazwa głównego monitora:</h3>
-                    <p>{nameOfMainMonitor}</p>
-                </div>
-                <div >
-                    <h3>Częstotliwość odświeżania:</h3>
-                    <p>{refreshRate} Hz</p>
-                </div>
-                <div >
-                    <h3>Rozdzielczość:</h3>
-                    <p>{horizontalResolution} x {verticalResolution}</p>
-                </div>
-    
+
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Liczba monitorów:</h3>
+                <div className="rowinformation_title">{amountOfMonitors === "" ? <LoadingIcon /> : amountOfMonitors}</div>
+
             </div>
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Nazwa głównego monitora:</h3>
+                <div className="rowinformation_title">{nameOfMainMonitor === "" ? <LoadingIcon /> : nameOfMainMonitor}</div>
+
+
+            </div>
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Częstotliwość odświeżania:</h3>
+                <div className="rowinformation_title">{refreshRate === "" ? <LoadingIcon /> : refreshRate}</div>
+
+            </div>
+            <div className="rowinformation_div">
+
+                <h3 className="rowinformation_title">Rozdzielczość:</h3>
+                <div className="rowinformation_title">{horizontalResolution === "" ? <LoadingIcon /> : horizontalResolution + ' x ' + horizontalResolution}</div>
+
+            </div>
+
+
 
 
 

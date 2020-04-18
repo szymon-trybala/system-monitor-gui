@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Chart } from "react-google-charts";
 import { Redirect } from 'react-router';
+import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
 const InformationRam = () => {
@@ -14,7 +15,7 @@ const InformationRam = () => {
     React.useEffect(() => {
 
         setInterval(func, 1000);
-    },[])
+    }, [])
 
     const func = () => {
         const { exec } = require('child_process');
@@ -34,24 +35,28 @@ const InformationRam = () => {
     return (
 
         <>
-            <div className="rowinformation">
-                <div >
-                    <h3>Wykorzystania pamięci RAM:</h3>
-                    <p>{percentageOfUse} %</p>
-                </div>
-                <div >
-                    <h3>Całkowita ilość pamięci RAM:</h3>
-                    <p>{allMemory} MB</p>
-                </div>
-                <div >
-                    <h3>Ilość wolnej pamięci:</h3>
-                    <p>{freeMemory} MB</p>
-                </div>
-                <div >
-                    <h3>Ilość używanej pamięci:</h3>
-                    <p>{memoryOfUse} MB</p>
-                </div>
+            <div className="rowinformation_div">
+
+                <h3 className="rowinformation_title">Wykorzystania pamięci RAM:</h3>
+                <div className="rowinformation_title">{percentageOfUse === "" ? <LoadingIcon /> : percentageOfUse + '%'}</div>
             </div>
+
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Całkowita ilość pamięci RAM:</h3>
+                <div className="rowinformation_title">{allMemory === "" ? <LoadingIcon /> : allMemory + 'MB'}</div>
+            </div>
+
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Ilość wolnej pamięci:</h3>
+                <div className="rowinformation_title">{freeMemory === "" ? <LoadingIcon /> : freeMemory + 'MB'}</div>
+
+            </div>
+            <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Ilość używanej pamięci:</h3>
+                <div className="rowinformation_title">{memoryOfUse === "" ? <LoadingIcon /> : memoryOfUse + 'MB'}</div>
+            </div>
+
+
             <div className="chart-position">
                 <Chart
                     width={'600px'}
@@ -72,9 +77,9 @@ const InformationRam = () => {
                         titleTextStyle: { color: 'grey' },
                         slices: {
                             1: { offset: 0.2 }
-                  
-                    },
-                   
+
+                        },
+
                     }}
 
                     rootProps={{ 'data-testid': '2' }}

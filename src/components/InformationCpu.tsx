@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Chart } from "react-google-charts";
+import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
 const InformationCpu = () => {
@@ -51,19 +52,23 @@ const InformationCpu = () => {
         <>
 
             <div className="rowinformation">
-                <div >
-                    <h3>Nazwa procesora:</h3>
-                    <p>{procesorName} </p>
-                </div>
-           
-                <div >
-                    <h3>Architektura procesora:</h3>
-                    <p>{architecture}</p>
+                <div className="rowinformation_div">
+
+
+                    <h3 className="rowinformation_title">Nazwa procesora:</h3>
+                    <div className="rowinformation_title">{procesorName === "" ? <LoadingIcon /> : procesorName}</div>
+
                 </div>
 
-                <div >
-                    <h3>Liczba rdzeni:</h3>
-                    <p>{numberOfCores}</p>
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Architektura procesora:</h3>
+                    <div className="rowinformation_title">{architecture === "" ? <LoadingIcon /> : architecture}</div>
+
+                </div>
+
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Liczba rdzeni:</h3>
+                    <div className="rowinformation_title">{numberOfCores === "" ? <LoadingIcon /> : numberOfCores}</div>
                 </div>
             </div>
 
@@ -77,7 +82,7 @@ const InformationCpu = () => {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Task', 'Hours per Day'],
-                        [ 'Wolne CPU',100 - parseInt(CPUusage)],
+                        ['Wolne CPU', 100 - parseInt(CPUusage)],
                         ['Użycie CPU', parseInt(CPUusage)],
                     ]}
                     options={{
@@ -88,8 +93,8 @@ const InformationCpu = () => {
                         titleTextStyle: { color: 'grey' },
                         slices: {
                             1: { offset: 0.2 }
-                  
-                    },
+
+                        },
                     }}
                     rootProps={{ 'data-testid': '2' }}
                 />

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Chart } from "react-google-charts";
 import { Redirect } from 'react-router';
+import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
 const InformationDisc = () => {
@@ -40,17 +41,20 @@ const InformationDisc = () => {
 
         <>
             <div className="rowinformation">
-                <div >
-                    <h3>Wolna pamieć:</h3>
-                    <p>{freeSpace} MB</p>
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Wolna pamieć:</h3>
+                    <div className="rowinformation_title">{freeSpace === "" ? <LoadingIcon /> : freeSpace + 'MB'}</div>
+
                 </div>
-                <div >
-                    <h3>Użyat:</h3>
-                    <p>{usedSpace} MB</p>
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Użyat:</h3>
+                    <div className="rowinformation_title">{usedSpace === "" ? <LoadingIcon /> : usedSpace + 'MB'}</div>
+
                 </div>
-                <div >
-                    <h3>Typ dysku:</h3>
-                    <p>{typeOfDisk} MB</p>
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Typ dysku:</h3>
+                    <div className="rowinformation_title">{typeOfDisk === "" ? <LoadingIcon /> : typeOfDisk}</div>
+
                 </div>
             </div>
             <div className="chart-position">
@@ -73,9 +77,9 @@ const InformationDisc = () => {
                         titleTextStyle: { color: 'grey' },
                         slices: {
                             1: { offset: 0.2 }
-                  
-                    },
-                }}
+
+                        },
+                    }}
 
                     rootProps={{ 'data-testid': '2' }}
                 />
