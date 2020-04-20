@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import { Chart } from "react-google-charts";
 import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
