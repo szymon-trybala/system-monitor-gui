@@ -12,7 +12,7 @@
   /* Our sidebar item styling */
   text-decoration: none;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 15px;
   color: #d1d1d1;
   transition: color 0.2s;
   font-size: 20px;
@@ -23,7 +23,6 @@
   color: white;
 }
 
-/* The rest copied directly from react-burger-menu docs */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
