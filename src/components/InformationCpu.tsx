@@ -9,7 +9,7 @@ const InformationCpu = () => {
     const [procesorName, setProcesorName] = React.useState("");
     const [architecture, setArchitecture] = React.useState("");
     const [numberOfCores, setNumberOfCores] = React.useState("");
-
+    const [numberOfThreads, setNumberOfThreads] = React.useState("");
 
     React.useEffect(() => {
         setInterval(func, 1000);
@@ -32,6 +32,7 @@ const InformationCpu = () => {
             setProcesorName(value[0]);
             setArchitecture(value[1]);
             setNumberOfCores(value[2]);
+            setNumberOfThreads(value[3]);
         });
 
     }
@@ -69,6 +70,11 @@ const InformationCpu = () => {
                     <h3 className="rowinformation_title">Liczba rdzeni:</h3>
                     <div className="rowinformation_title">{numberOfCores === "" ? <LoadingIcon /> : numberOfCores}</div>
                 </div>
+                <div className="rowinformation_div">
+                    <h3 className="rowinformation_title">Liczba wątków:</h3>
+                    <div className="rowinformation_title">{numberOfThreads === "" ? <LoadingIcon /> : numberOfThreads}</div>
+                </div>
+         
             </div>
 
 
