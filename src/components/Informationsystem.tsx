@@ -14,6 +14,7 @@ const SystemInformation = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             setHostName(stdout);
         })
         exec('system_monitor_cli.exe --win', (error: any, stdout: any, stderr: any) => {

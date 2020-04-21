@@ -25,6 +25,7 @@ const InformationMonitor = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             var value = stdout.toString().split("\n");
             setAmountOfMonitors(value[0]);
             setNameOfMainMonitor(value[1]);

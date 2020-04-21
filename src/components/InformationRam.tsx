@@ -24,6 +24,7 @@ const InformationRam = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             var value = stdout.toString().split("\n");
             setPercentageOfUse(value[0]);
             setAllMemory(value[1]);

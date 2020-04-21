@@ -10,8 +10,8 @@ const NetworkAdapter = () => {
 
 
     React.useEffect(() => {
-
-        setInterval(func, 1000);
+        //setInterval(func, 1000);
+        func();
     }, [])
 
     const func = () => {
@@ -21,6 +21,7 @@ const NetworkAdapter = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             var value = stdout.toString().split("\n");
 
             setMaxSpeed(value[0]);

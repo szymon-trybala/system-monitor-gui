@@ -27,6 +27,7 @@ const InformationCpu = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             var value = stdout.toString().split("\n");
 
             setProcesorName(value[0]);
