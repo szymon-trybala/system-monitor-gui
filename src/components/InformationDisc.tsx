@@ -5,57 +5,104 @@ import { Redirect } from 'react-router';
 import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
-const InformationDisc = () => {
 
-    const [freeSpace, setFreeSpace] = React.useState("");
-    const [usedSpace, setUsedSpace] = React.useState("");
-    const [typeOfDisk, setTypeOfDisk] = React.useState("");
+    class InformationDisc extends Component
+  {
+    state = {
+    
+        freeSpace: '',
+        usedSpace: '',
+        typeOfDisk: '',
+        letterOfDisk: '',
+            
+        }
 
-    React.useEffect(() => {
+        componentDidMount(){
+        console.log('d')
+        setInterval(this.func, 1000);
+  
+    }
 
-        setInterval(func, 1000);
-    }, [])
+     func = () => {
 
-    const func = () => {
+
         const { exec } = require('child_process');
-        exec('system_monitor_cli.exe -d', (error: any, stdout: string, stderr: any) => {
+        let commend = "system_monitor_cli.exe -d"
+   
+       
+         if(this.state.letterOfDisk !== '')
+         {
+            commend =  commend+' -'+  this.state.letterOfDisk;    
+         }
+         console.log(commend)
+
+        exec(commend, (error: any, stdout: string, stderr: any) => {
             if (error) {
                 console.log(error);
                 return;
             }
             var value = stdout.toString().split("\n");
-            setFreeSpace(value[0]);
-            setUsedSpace(value[1]);
-        });
+          
+           let freeSpace;
+           let usedSpace;
+
+           freeSpace=value[0];
+        usedSpace=value[1];
+       
+        this.setState({
+           freeSpace, 
+           usedSpace
+        })
+       
+    });
+      
         exec('system_monitor_cli.exe --disk-type', (error: any, stdout: string, stderr: any) => {
             if (error) {
                 console.log(error);
                 return;
             }
-            setTypeOfDisk(stdout);
+            this.state.typeOfDisk=stdout;
         });
-
+        
     };
 
+    handleChange = (e) => {
+        e.preventDefault();
+        var letterOfDisk = e.target.value;
+        this.setState({
+            letterOfDisk
+         })
+           
+    }
+    render() {
     return (
 
         <>
             <div className="rowinformation">
                 <div className="rowinformation_div">
                     <h3 className="rowinformation_title">Wolna pamieć:</h3>
-                    <div className="rowinformation_title">{freeSpace === "" ? <LoadingIcon /> : freeSpace + 'MB'}</div>
+                    <div className="rowinformation_title">{this.state.freeSpace === "" ? <LoadingIcon /> : this.state.freeSpace + 'MB'}</div>
 
                 </div>
                 <div className="rowinformation_div">
                     <h3 className="rowinformation_title">Użycie:</h3>
-                    <div className="rowinformation_title">{usedSpace === "" ? <LoadingIcon /> : usedSpace + 'MB'}</div>
+                    <div className="rowinformation_title">{this.state.usedSpace === "" ? <LoadingIcon /> : this.state.usedSpace + 'MB'}</div>
 
                 </div>
                 <div className="rowinformation_div">
                     <h3 className="rowinformation_title">Typ dysku:</h3>
-                    <div className="rowinformation_title">{typeOfDisk === "" ? <LoadingIcon /> : typeOfDisk}</div>
+                    <div className="rowinformation_title">{this.state.typeOfDisk === "" ? <LoadingIcon /> : this.state.typeOfDisk}</div>
 
                 </div>
+
+                <div className="rowinformation_div">
+                <h3 className="rowinformation_title">Dysk:</h3>
+                    
+                    <input type="text" name="letter" value={this.state.letterOfDisk} onChange={this.handleChange} className="rowinformation_input"/>
+                </div>
+
+
+
             </div>
             <div className="chart-position">
                 <Chart
@@ -66,8 +113,8 @@ const InformationDisc = () => {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Task', 'Hours per Day'],
-                        ['Wolna pamięć', parseInt(freeSpace)],
-                        ['Używana pamięć', parseInt(usedSpace)],
+                        ['Wolna pamięć', parseInt(this.state.freeSpace)],
+                        ['Używana pamięć', parseInt(this.state.usedSpace)],
                     ]}
                     options={{
                         title: 'Twardy dysk',
@@ -86,6 +133,6 @@ const InformationDisc = () => {
             </div>
         </>
     )
-}
+}}
 
 export default InformationDisc;

@@ -39,3 +39,10 @@
     margin-top: 11px;
 
 }
+.rowinformation_input {
+
+    margin-left: 5px;
+width: 100px;
+background-color:rgb(230, 223, 223);
+color:gray;
+}
