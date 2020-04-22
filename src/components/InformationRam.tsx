@@ -14,7 +14,12 @@ const InformationRam = () => {
 
     React.useEffect(() => {
 
-        setInterval(func, 1000);
+        let handle = setInterval(func, 1000);
+
+        return () => {
+          clearInterval(handle);
+        }
+
     }, [])
 
     const func = () => {

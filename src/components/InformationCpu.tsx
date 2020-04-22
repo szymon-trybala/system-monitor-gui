@@ -12,7 +12,10 @@ const InformationCpu = () => {
     const [numberOfThreads, setNumberOfThreads] = React.useState("");
 
     React.useEffect(() => {
-        setInterval(func, 1000);
+      let handle = setInterval(func, 1000);
+      return () => {
+        clearInterval(handle);
+      }
     }, [])
 
     React.useEffect(() => {

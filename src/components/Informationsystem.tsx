@@ -13,12 +13,15 @@ const SystemInformation = () => {
 
 
     React.useEffect(() => {
-        setInterval(getTime, 1000);
+        let handle = setInterval(getTime, 1000);
+        return () => {
+          clearInterval(handle);
+        }
     }, [])
 
-
-
+   
     const getTime = () => {
+      console.log("Pobieram sobie czas");
         const { exec } = require('child_process');
         exec('system_monitor_cli.exe -u', (error: any, stdout: any, stderr: any) => {
             if (error) {

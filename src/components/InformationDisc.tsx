@@ -23,6 +23,7 @@ export const SelectDiscLetter = (props) => {
 
 
 class InformationDisc extends Component {
+
     state = {
 
         freeSpace: '',
@@ -31,6 +32,7 @@ class InformationDisc extends Component {
         typeOfDisk: '',
         letterOfDisk: '',
         allLetterOfDisk: [],
+        intervalHandel : undefined
 
     }
 
@@ -47,13 +49,18 @@ class InformationDisc extends Component {
     }
 
     componentDidMount() {
-        setInterval(this.func, 1000);
+        let handle = setInterval(this.func, 1000);
+        this.setState({
+          intervalHandel : handle
+        })
         this.getLetter();
+    }
 
+    componentWillUnmount(){
+        clearInterval(this.state.intervalHandel);
     }
 
     getLetter = () => {
-
         const { exec } = require('child_process');
         let commend = "system_monitor_cli.exe -p"
         exec(commend, (error: any, stdout: string, stderr: any) => {
@@ -76,7 +83,7 @@ class InformationDisc extends Component {
 
     func = () => {
 
-
+       
         const { exec } = require('child_process');
         let commend = "system_monitor_cli.exe -d"
 
