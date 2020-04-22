@@ -6,6 +6,22 @@ import LoadingIcon from './LoadingIcon'
 import "../styles/chart.css"
 
 
+
+
+export const SelectDiscLetter = (props) => {
+
+    const list = props.letterOfDisk.map(letterOfDisk => <option key={letterOfDisk} value={letterOfDisk}>{letterOfDisk}</option>)
+
+    return (
+
+        <select name={props.name} value={props.allLetterOfDisk} onChange={props.handleChange} className="rowinformation_list">
+            {list}
+        </select>
+    )
+}
+
+
+
 class InformationDisc extends Component {
     state = {
 
@@ -14,11 +30,48 @@ class InformationDisc extends Component {
         allSpace: '',
         typeOfDisk: '',
         letterOfDisk: '',
+        allLetterOfDisk: [],
 
+    }
+
+    handleChange = (e) => {
+
+        const name = e.target.name;
+        const value = e.target.value;
+
+        this.setState({
+
+            [name]: value,
+
+        })
     }
 
     componentDidMount() {
         setInterval(this.func, 1000);
+        this.getLetter();
+
+    }
+
+    getLetter = () => {
+
+        const { exec } = require('child_process');
+        let commend = "system_monitor_cli.exe -p"
+        exec(commend, (error: any, stdout: string, stderr: any) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            var allLetterOfDisk = stdout.toString().split(":\\");
+            allLetterOfDisk.splice(-1, 1)
+
+            this.setState({
+                allLetterOfDisk
+            })
+
+
+            console.log(this.state.allLetterOfDisk)
+
+        });
     }
 
     func = () => {
@@ -31,7 +84,7 @@ class InformationDisc extends Component {
         if (this.state.letterOfDisk !== '') {
             commend = commend + ' -' + this.state.letterOfDisk;
         }
-        console.log(commend)
+
 
         exec(commend, (error: any, stdout: string, stderr: any) => {
             if (error) {
@@ -49,7 +102,7 @@ class InformationDisc extends Component {
                 usedSpace,
                 allSpace
             })
-
+            console.log(this.state.letterOfDisk)
         });
 
         exec('system_monitor_cli.exe --disk-type', (error: any, stdout: string, stderr: any) => {
@@ -63,14 +116,7 @@ class InformationDisc extends Component {
 
     };
 
-    handleChange = (e) => {
-        e.preventDefault();
-        var letterOfDisk = e.target.value;
-        this.setState({
-            letterOfDisk
-        })
 
-    }
     render() {
         return (
             <>
@@ -93,15 +139,19 @@ class InformationDisc extends Component {
                         <div className="rowinformation_title">{this.state.typeOfDisk === "" ? <LoadingIcon /> : this.state.typeOfDisk}</div>
                     </div>
 
+
+
                     <div className="rowinformation_div">
                         <h3 className="rowinformation_title">Dysk:</h3>
-
-                        <input type="text" name="letter" value={this.state.letterOfDisk} onChange={this.handleChange} className="rowinformation_input" />
+                        <SelectDiscLetter name="letterOfDisk" letterOfDisk={this.state.allLetterOfDisk} handleChange={this.handleChange} />
                     </div>
 
-
-
                 </div>
+
+
+
+
+
                 <div className="chart-position">
                     <Chart
                         width={'600px'}
