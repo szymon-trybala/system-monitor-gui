@@ -14,13 +14,13 @@
   margin-bottom: 20px;
   padding: 15px;
   color: #d1d1d1;
-  transition: color 0.9s;
   font-size: 20px;
 }
 
 /* Change color on hover */
 .bm-item:hover {
   color: white;
+  outline: -webkit-focus-ring-color auto 1px;
 }
 
 

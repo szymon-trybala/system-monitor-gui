@@ -25,27 +25,29 @@ const Menu = ({isMenuOpen,toggleMenu}) => {
     <BurgerMenu pageWrapId={"page-wrap"} 
                 outerContainerId={"app"} 
                 isOpen={isMenuOpen}
-                onStateChange={(state) => toggleMenu(state.isOpen)}>
+                onStateChange={(state) => toggleMenu(state.isOpen)}
+                disableAutoFocus
+                >
 
-          <NavLink to="/" className="menu-item" onClick={() => toggleMenu(false)} >
+          <NavLink to="/"  onClick={() => toggleMenu(false)} >
             Strona powitalna
           </NavLink>
-          <NavLink to="/system" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/system"  onClick={() => toggleMenu(false)}>
             Informacje o systemie
           </NavLink>
-          <NavLink to="/network/adapter" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/network/adapter" onClick={() => toggleMenu(false)}>
             Informacje o adapterze sieciowym
           </NavLink>
-          <NavLink to="/ram" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/ram"  onClick={() => toggleMenu(false)}>
             Informacje o RAM
           </NavLink>
-          <NavLink to="/cpu" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/cpu"  onClick={() => toggleMenu(false)}>
             Informacje o CPU
           </NavLink>
-          <NavLink to="/disc" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/disc" onClick={() => toggleMenu(false)}>
             Informacje o dysku
           </NavLink>
-          <NavLink to="/monitor" className="menu-item" onClick={() => toggleMenu(false)}>
+          <NavLink to="/monitor" onClick={() => toggleMenu(false)}>
             Informacje o monitorze
           </NavLink>
         </BurgerMenu>

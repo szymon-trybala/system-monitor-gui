@@ -11,17 +11,6 @@ const InformationCpu = () => {
     const [numberOfCores, setNumberOfCores] = React.useState("");
     const [numberOfThreads, setNumberOfThreads] = React.useState("");
 
-    React.useEffect(() => {
-      let handle = setInterval(func, 1000);
-      return () => {
-        clearInterval(handle);
-      }
-    }, [])
-
-    React.useEffect(() => {
-        funcStaticData();
-    }, [])
-
     const funcStaticData = () => {
 
         const { exec } = require('child_process');
@@ -48,9 +37,19 @@ const InformationCpu = () => {
                 console.log(error);
                 return;
             }
+            console.log(stdout);
             setCPUusage(stdout);
         });
     };
+    
+    React.useEffect(() => {
+      let handle = setInterval(func, 1000);
+      funcStaticData();
+      return () => {
+        clearInterval(handle);
+      }
+    }, [])
+
 
     return (
         <>
